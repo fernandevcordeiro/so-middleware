@@ -1,0 +1,6 @@
+pandas==2.*
+kafka-python==2.*
+opentelemetry-api==1.*
+opentelemetry-sdk==1.*
+opentelemetry-exporter-otlp==1.*
+opentelemetry-instrumentation-confluent-kafka

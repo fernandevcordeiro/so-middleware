@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: load-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: load-app
+  template:
+    metadata:
+      labels:
+        app: load-app
+    spec:
+      containers:
+        - name: load-app
+          image: load-app:latest
+          imagePullPolicy: Never
+          env:
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: "kafka:9092"
+            - name: KAFKA_TOPIC
+              value: "ibge-enderecos"
+            - name: DATA_DIRECTORY
+              value: "/data"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://tempo:4317"
+            - name: OTEL_SERVICE_NAME
+              value: "load-app"
+          volumeMounts:
+            - name: csvs
+              mountPath: /data
+      volumes:
+        - name: csvs
+          hostPath:
+            path: /mnt/data/csvs

@@ -1,0 +1,15 @@
+zookeeper:
+  enabled: true
+
+listeners:
+  client:
+    protocol: PLAINTEXT
+
+advertisedListeners:
+  - name: CLIENT
+    listener: PLAINTEXT://:9092
+    advertisedHost: kafka
+    advertisedPort: 9092
+
+service:
+  type: ClusterIP

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: store-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: store-app
+  template:
+    metadata:
+      labels:
+        app: store-app
+    spec:
+      containers:
+        - name: store-app
+          image: store-app:latest
+          imagePullPolicy: Never
+          env:
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: "kafka:9092"
+            - name: KAFKA_TOPIC
+              value: "ibge-enderecos"
+            - name: KAFKA_GROUP_ID
+              value: "store-app-group"
+            - name: MINIO_ENDPOINT
+              value: "minio.storage.svc.cluster.local:9000"
+            - name: MINIO_ACCESS_KEY
+              value: "minioadmin"
+            - name: MINIO_SECRET_KEY
+              value: "minioadmin"
+            - name: MINIO_BUCKET
+              value: "ibge-data"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://tempo:4317"
+            - name: OTEL_SERVICE_NAME
+              value: "store-app"
+            - name: BATCH_SIZE
+              value: "200"
+            - name: BATCH_TIMEOUT
+              value: "30"

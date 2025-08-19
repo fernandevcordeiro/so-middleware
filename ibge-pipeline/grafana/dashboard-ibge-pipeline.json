@@ -1,0 +1,53 @@
+{
+  "title": "IBGE Pipeline - Tracing (Tempo)",
+  "timezone": "browser",
+  "panels": [
+    {
+      "type": "traces",
+      "title": "\u00daltimos traces - load-app",
+      "options": {
+        "query": {
+          "query": "{ service.name = \"load-app\" }",
+          "limit": 50,
+          "direction": "BACKWARD"
+        },
+        "showSpanBar": true
+      },
+      "datasource": {
+        "type": "tempo",
+        "uid": "tempo"
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "type": "traces",
+      "title": "\u00daltimos traces - store-app",
+      "options": {
+        "query": {
+          "query": "{ service.name = \"store-app\" }",
+          "limit": 50,
+          "direction": "BACKWARD"
+        },
+        "showSpanBar": true
+      },
+      "datasource": {
+        "type": "tempo",
+        "uid": "tempo"
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      }
+    }
+  ],
+  "schemaVersion": 38,
+  "version": 1,
+  "refresh": "10s"
+}

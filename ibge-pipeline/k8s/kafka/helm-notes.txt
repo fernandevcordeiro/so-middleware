@@ -1,0 +1,11 @@
+# Kafka (Bitnami) - instalação no minikube
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+helm install kafka bitnami/kafka --set zookeeper.enabled=true
+
+# Testar conectividade
+kubectl get pods
+# Para criar o tópico manualmente (se necessário):
+# kubectl run kafka-client --restart='Never' --image docker.io/bitnami/kafka:latest --namespace default --command -- sleep infinity
+# kubectl exec -it kafka-client -- bash
+# kafka-topics.sh --create --topic ibge-enderecos --bootstrap-server kafka:9092 --replication-factor 1 --partitions 1
